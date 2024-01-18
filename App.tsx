@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -20,6 +20,7 @@ function App(): React.JSX.Element {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // backgroundColor: isDarkMode ? Colors.darker : '#FFFFFF',
   };
 
   return (
@@ -30,7 +31,10 @@ function App(): React.JSX.Element {
           backgroundColor={backgroundStyle.backgroundColor}
         />
       </SafeAreaView>
-      <Stack.Navigator initialRouteName={'Home'}>
+
+      <Stack.Navigator
+        initialRouteName={'Home'}
+        screenOptions={{contentStyle: {backgroundColor: '#FFFFFF'}}}>
         <Stack.Screen name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
