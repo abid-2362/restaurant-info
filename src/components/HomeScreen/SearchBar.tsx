@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Dispatch, SetStateAction} from 'react';
 
 interface ISearchProps {
   query: string;
-  onQueryChange: () => void;
+  onQueryChange: Dispatch<SetStateAction<string>>;
   onSearch: () => void;
 }
 const SearchBar = ({query, onQueryChange, onSearch}: ISearchProps) => (
