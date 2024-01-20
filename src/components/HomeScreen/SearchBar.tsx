@@ -1,23 +1,44 @@
 import * as React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const SearchBar = () => (
-  <View style={styles.background}>
-    <Text>Search Bar</Text>
-    <Text>
-      <AntDesign name={'search1'} style={{color: 'red', fontSize: 50}} />
-    </Text>
+interface ISearchProps {
+  query: string;
+  onQueryChange: () => void;
+  onSearch: () => void;
+}
+const SearchBar = ({query, onQueryChange, onSearch}: ISearchProps) => (
+  <View style={styles.backgroundStyle}>
+    <AntDesign name={'search1'} style={styles.iconStyle} />
+    <TextInput
+      autoCapitalize={'none'}
+      autoCorrect={false}
+      placeholder={'Search'}
+      style={styles.inputStyle}
+      value={query}
+      onChangeText={onQueryChange}
+      onEndEditing={onSearch}
+    />
   </View>
 );
 
 const styles = StyleSheet.create({
-  background: {
+  backgroundStyle: {
     backgroundColor: '#F0EEEE',
-    // borderWidth: 1,
     height: 50,
     borderRadius: 5,
     marginHorizontal: 15,
+    flexDirection: 'row',
+    marginTop: 15,
+  },
+  iconStyle: {
+    fontSize: 35,
+    alignSelf: 'center',
+    marginHorizontal: 15,
+  },
+  inputStyle: {
+    flex: 1,
+    fontSize: 18,
   },
 });
 
