@@ -5,17 +5,19 @@ interface ISingleRestaurant {
   restaurant: any;
 }
 
-const SingleRestaurant = ({restaurant: r}: ISingleRestaurant) => (
-  <View style={styles.singleRestaurantStyles}>
-    <View style={styles.imageContainer}>
-      <Image source={{uri: r.image_url}} style={styles.imageStyle} />
+const SingleRestaurant = ({restaurant: r}: ISingleRestaurant) => {
+  return (
+    <View style={styles.singleRestaurantStyles}>
+      <View style={styles.imageContainer}>
+        <Image source={{uri: r.image_url}} style={styles.imageStyle} />
+      </View>
+      <Text style={styles.rName}>{r.name}</Text>
+      <Text>
+        {r.rating} Stars, {r.review_count} reviews
+      </Text>
     </View>
-    <Text style={styles.rName}>{r.name}</Text>
-    <Text>
-      {r.rating} Stars, {r.review_count} reviews
-    </Text>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   singleRestaurantStyles: {
