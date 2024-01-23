@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Button} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Dispatch, SetStateAction} from 'react';
 
@@ -10,7 +10,6 @@ interface ISearchProps {
 }
 const SearchBar = ({query, onQueryChange, onSearch}: ISearchProps) => (
   <View style={styles.backgroundStyle}>
-    <AntDesign name={'search1'} style={styles.iconStyle} />
     <TextInput
       autoCapitalize={'none'}
       autoCorrect={false}
@@ -20,6 +19,7 @@ const SearchBar = ({query, onQueryChange, onSearch}: ISearchProps) => (
       onChangeText={onQueryChange}
       onEndEditing={onSearch}
     />
+    <AntDesign name={'search1'} onPress={onSearch} style={styles.iconStyle} />
   </View>
 );
 
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     flexDirection: 'row',
     marginTop: 15,
+    marginBottom: 10,
   },
   iconStyle: {
     fontSize: 35,
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     flex: 1,
     fontSize: 18,
+    marginLeft: 15,
   },
 });
 

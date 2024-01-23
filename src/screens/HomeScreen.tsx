@@ -1,12 +1,17 @@
 import * as React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import SearchBar from '../components/HomeScreen/SearchBar.tsx';
 import {useState} from 'react';
 import useResults from '../hooks/useResults.ts';
+import ResultsList from '../components/HomeScreen/ResultsList.tsx';
 
 const HomeScreen = () => {
   const [query, setQuery] = useState('');
   const [searchApi, results, errorMessage] = useResults();
+
+  const filterResultsByPrice = (price = '$') => {
+    return results.filter(result => result.price === price);
+  };
 
   return (
     <View style={styles.screen}>
@@ -15,8 +20,21 @@ const HomeScreen = () => {
         onQueryChange={setQuery}
         onSearch={() => searchApi(query)}
       />
-      <Text>We have found {results.length} results</Text>
-      {errorMessage && <Text>{errorMessage}</Text>}
+      <ScrollView>
+        <ResultsList
+          results={filterResultsByPrice('$$')}
+          title={'Cost Effective'}
+        />
+        <ResultsList
+          results={filterResultsByPrice('$$$')}
+          title={'Bit Pricier'}
+        />
+        <ResultsList
+          results={filterResultsByPrice('$$$$')}
+          title={'Big Spender'}
+        />
+        {errorMessage && <Text>{errorMessage}</Text>}
+      </ScrollView>
     </View>
   );
 };
@@ -24,6 +42,8 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    // borderColor: 'red',
+    // borderWidth: 10,
   },
 });
 

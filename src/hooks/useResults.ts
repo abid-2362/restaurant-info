@@ -1,15 +1,30 @@
-import {useEffect, useState} from 'react';
-import yelp from '../api/yelp';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+// import yelp from '../api/yelp';
+
+// TODO:: Mocking Data - delete after completion.
+import testData from '../api/test-data.ts';
 
 const useResults = (): [
   (searchTerm?: string) => Promise<void>,
   any[],
   string,
 ] => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Array<any>>([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   const searchApi = async (searchTerm: string = '') => {
+    setErrorMessage('');
+    setResults([]);
+    // do something with searchTerm
+    searchTerm;
+    setTimeout(() => {
+      setResults(testData.businesses);
+    }, 100);
+  };
+
+  /*const searchApi = async (searchTerm: string = '') => {
+    setErrorMessage('');
+    console.log(`searching ${searchTerm}`);
     try {
       const response = await yelp.get('/search', {
         params: {
@@ -19,10 +34,13 @@ const useResults = (): [
         },
       });
       setResults(response.data.businesses);
-    } catch (err) {
-      setErrorMessage(err?.message ?? 'something went wrong');
+      console.log('businesses', response.data.businesses);
+    } catch (err: any) {
+      setErrorMessage(
+        `${err?.message}: ${err?.code}` ?? 'something went wrong',
+      );
     }
-  };
+  };*/
 
   useEffect(() => {
     searchApi('pasta');
